@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuaTengForm", "HuaTengForm\HuaTengForm.csproj", "{F80214AD-6C68-448B-A636-5556822155D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YokoClassLib", "..\YokoClassLib\YokoClassLib\YokoClassLib.csproj", "{5BB258B2-DE72-4694-8158-554CF06447AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F80214AD-6C68-448B-A636-5556822155D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F80214AD-6C68-448B-A636-5556822155D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F80214AD-6C68-448B-A636-5556822155D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB258B2-DE72-4694-8158-554CF06447AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB258B2-DE72-4694-8158-554CF06447AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB258B2-DE72-4694-8158-554CF06447AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB258B2-DE72-4694-8158-554CF06447AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

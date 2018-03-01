@@ -9,15 +9,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+using System.Net;
+using System.Net.Sockets;
+
 namespace HuaTengForm
 {
     //-----------------------------------------------------------------------------------------------------
     public partial class MainPage : Form
     {
+        private Timer myTimer;
+
         //-----------------------------------------------------------------------------------------------------
         public MainPage()
         {
             InitializeComponent();
+
+            myTimer = new System.Windows.Forms.Timer();
+            myTimer.Enabled = false;
+            myTimer.Interval = 20;
+            //给timer挂起事件  
+            myTimer.Tick += new EventHandler(mTimerTick);
         }
 
         //-----------------------------------------------------------------------------------------------------
@@ -81,13 +93,13 @@ namespace HuaTengForm
         //-----------------------------------------------------------------------------------------------------
         private void MainPage_Load(object sender, EventArgs e)
         {
-            showf1();
             label1.Text = DateTime.Now.ToString(CultureInfo.InvariantCulture);
         }
 
         //-----------------------------------------------------------------------------------------------------
         private void 运行报表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            GC.Collect();
             closefall();
             showf2();
         }
@@ -95,9 +107,10 @@ namespace HuaTengForm
         //-----------------------------------------------------------------------------------------------------
         private void 性能测试ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            GC.Collect();
             closefall();
             showf1();
-
         }
 
         //-----------------------------------------------------------------------------------------------------
@@ -150,6 +163,68 @@ namespace HuaTengForm
             label1.Text = DateTime.Now.ToString(CultureInfo.InvariantCulture);
         }
 
+        private void MainPage_Shown(object sender, EventArgs e)
+        {
+            //======延时，显示出界面
+            DateTime now = DateTime.Now;
+            int s;
+            do
+            {
+                TimeSpan spand = DateTime.Now - now;
+                s = spand.Milliseconds;
+                Application.DoEvents();
+            }
+            while (s <= 200);
+
+
+            //=======测试通讯是否正常
+            PCls.COM1.license = "ed9073a502e0aab";   //授权码ed9073a502e0aab
+            IPAddress ip = IPAddress.Parse(PCls.mIP);
+            TcpClient client = new TcpClient();
+            try
+            {
+                client.Connect(ip, PCls.mPort);
+                client.Close();
+
+                PCls.COM1.StartCOM();   //无码通讯不上。
+                PCls.StepPath = 1;
+                myTimer.Enabled = true;
+                showf1();
+            }
+            catch
+            {
+                MessageBox.Show("通讯线连接不正常！");
+                PCls.StepPath = 2;
+            }
+
+        }
+
+        private void mTimerTick(object sender, EventArgs e)
+        {
+
+            switch (PCls.StepPath)
+            {
+                case 1:
+
+                    PCls.StepPath = 2;
+                    break;
+                case 2:
+
+                    PCls.StepPath = 2;
+                    break;
+                case 88:
+
+                    PCls.StepPath = 100;
+                    break;
+
+            }
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

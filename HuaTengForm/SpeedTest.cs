@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using Microsoft.VisualBasic.PowerPacks;
 
 namespace HuaTengForm
@@ -15,11 +14,25 @@ namespace HuaTengForm
     //-----------------------------------------------------------------------------------------------------
     public partial class SpeedTest : Form
     {
+
+
+        int FlagLoad;
+        int DelayCnt;
+        System.Windows.Forms.Timer myTimer;
+
         //-----------------------------------------------------------------------------------------------------
         public SpeedTest()
         {
             InitializeComponent();
             InitMyShape();
+
+            FlagLoad = 0;
+            DelayCnt = 0;
+            myTimer = new System.Windows.Forms.Timer();
+            myTimer.Enabled = true;
+            myTimer.Interval = 20;
+            //给timer挂起事件  
+            myTimer.Tick += new EventHandler(mTimerTick);
         }
 
         const int k = 32;
@@ -119,6 +132,7 @@ namespace HuaTengForm
                 rc.BackStyle = BackStyle.Opaque;
                 rc.BackColor = Color.White;
                 rc.Location = points[ptx];
+                rc.Tag = "M" + (ptx+1);
                 ptx++;
             }
 
@@ -263,6 +277,53 @@ namespace HuaTengForm
                 e.Handled = true;
             }  
 
+        }
+
+        private void mTimerTick(object sender, EventArgs e)
+        {
+
+            switch (FlagLoad)
+            {
+                case 0:
+                    PCls.mInterface.TagFileProcess(this);  //生成device.ini文件
+                    PCls.COM1.StartPic();
+                    FlagLoad = 1;
+                    DelayCnt = 0;
+                    break;
+                case 1:
+                    DelayCnt++;
+                    if (DelayCnt > 2)     //做一个延时，要不读上来的数有可能是上一个界面上的
+                    {
+                        DelayCnt = 0;
+                        FlagLoad = 2;
+                    }
+                    break;
+                case 2:
+                    PCls.mInterface.iniAssign();//这个东西定时刷新即可
+
+                    if (PCls.COM1.SocketState >= 0)
+                    {
+                        label1.Text = "连接正常";
+                    }
+                    else
+                    {
+                        label1.Text = "连接异常";
+                    }
+                    break;
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (button2.BackColor == System.Drawing.Color.Lime)
+            {
+                PCls.COM1.WritePlc(button2.Tag, PCls.TypeB1);
+            }
+            else
+            {
+                PCls.COM1.WritePlc(button2.Tag, PCls.TypeB0);
+            }
         }
 
     }

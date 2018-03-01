@@ -56,6 +56,7 @@
     <Compile Include="MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="PCls.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunStatus.cs">
@@ -105,6 +106,12 @@
   <ItemGroup>
     <Content Include="ooopic_1519737948.ico" />
     <Content Include="ooopic_1519738239.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\YokoClassLib\YokoClassLib\YokoClassLib.csproj">
+      <Project>{5bb258b2-de72-4694-8158-554cf06447ae}</Project>
+      <Name>YokoClassLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

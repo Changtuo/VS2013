@@ -147,7 +147,7 @@ namespace HuaTengForm
             else
             {
                 button1.Text = "Run";
-                button1.BackColor = Color.LightGreen;
+                button1.BackColor = Color.Yellow;
             }
         }
 

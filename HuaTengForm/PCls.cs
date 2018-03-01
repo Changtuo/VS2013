@@ -21,11 +21,11 @@ namespace HuaTengForm
         /// 以下为客户填写部分
         /// </summary>
         public static string mIP = "192.168.0.2";
-        public static int mPort = 12289;
+        public static int mPort = 502;
 
         //创建COM1
-        //public static ComClassLib.ModbusEthernet COM1 = new ComClassLib.ModbusEthernet(2, mIP, mPort);//<参数1>连接编号<参数2>IP地址<参数3>端口号
-        public static ComClassLib.yokoEthernet COM1 = new ComClassLib.yokoEthernet(2, mIP, mPort);//<参数1>连接编号<参数2>IP地址<参数3>端口号
+        public static ComClassLib.ModbusEthernet COM1 = new ComClassLib.ModbusEthernet(2, mIP, mPort);//<参数1>连接编号<参数2>IP地址<参数3>端口号
+        //public static ComClassLib.yokoEthernet COM1 = new ComClassLib.yokoEthernet(2, mIP, mPort);//<参数1>连接编号<参数2>IP地址<参数3>端口号
         public static ComClassLib.tagFile mInterface = new ComClassLib.tagFile();      //界面读取部分
 
     }

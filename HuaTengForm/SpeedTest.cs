@@ -132,7 +132,7 @@ namespace HuaTengForm
                 rc.BackStyle = BackStyle.Opaque;
                 rc.BackColor = Color.White;
                 rc.Location = points[ptx];
-                rc.Tag = "M" + (ptx+1);
+                rc.Tag = "M" + (ptx + 11);
                 ptx++;
             }
 
@@ -324,6 +324,11 @@ namespace HuaTengForm
             {
                 PCls.COM1.WritePlc(button2.Tag, PCls.TypeB0);
             }
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            PCls.COM1.WritePlc(textBox1.Tag, PCls.TypeILF, textBox2.Text, 1, 500);
         }
 
     }

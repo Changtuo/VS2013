@@ -120,7 +120,8 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(50, 21);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Tag = "D1";
+            this.textBox1.Tag = "D10 0,1,0";
+            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label1
@@ -159,7 +160,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(718, 402);
+            this.button2.Location = new System.Drawing.Point(704, 416);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
